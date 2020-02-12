@@ -9,6 +9,7 @@ describe('Event Queue:', () => {
 
   beforeAll(async () => {
     eventQueue = new EventQueue('testEventQueue', REDIS_URL)
+    counter = 0
 
     // add event to print date
     eventQueue.addEventProcessor(
@@ -56,8 +57,6 @@ describe('Event Queue:', () => {
       // custom stringify function to only stringify login and omit secret
       ({ login }) => (JSON.stringify({ login })),
     )
-
-    counter = 0
   })
 
   afterAll(async () => {
