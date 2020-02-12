@@ -18,11 +18,11 @@ describe('Event Queue:', () => {
       },
     )
 
-    // add event to print date
+    // add counter event with side affect
     eventQueue.addEventProcessor(
       'incrementCounter', // eventName
       () => { // eventCallback
-        counter++
+        counter += 1
       },
     )
 
@@ -75,7 +75,7 @@ describe('Event Queue:', () => {
       limit: 3, // runs maximum of 3
     })
     await expect(job.finished()).resolves.toBe(undefined)
-    await new Promise(r => setTimeout(r, 3000))
+    await new Promise((r) => setTimeout(r, 3000))
     expect(counter).toEqual(3)
   })
 
@@ -95,6 +95,6 @@ describe('Event Queue:', () => {
       login: 'public-login',
       secret,
     })
-    await expect(job.finished()).resolves.toBe('shhhhh....secret')
+    await expect(job.finished()).resolves.toBe(secret)
   })
 })
